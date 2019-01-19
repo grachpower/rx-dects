@@ -1,0 +1,47 @@
+
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    // "noEmit": true,
+    "declaration": true,
+    "noEmitHelpers": false,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "outDir": "dist",
+    "lib": [
+      "dom",
+      "es2017",
+      "es2017.object"
+    ],
+    "baseUrl": "./src",
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json",
+        "enableTsDiagnostics": true
+      }
+    }
+  }
+}
