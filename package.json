@@ -1,6 +1,6 @@
 {
   "name": "rx-dects",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "rxjs typescript decorators",
   "main": "dist/public-api.js",
   "scripts": {
@@ -17,13 +17,26 @@
     "url": "git+https://github.com/grachpower/rx-dects.git"
   },
   "author": "Artem Andreev",
+  "email": "amiscary@gmail.com",
   "license": "MIT",
   "files": [
     "dist"
   ],
   "keywords": [
     "typescript",
-    "js"
+    "ts",
+    "js",
+    "javascript",
+    "decorators",
+    "decorator",
+    "rxjs",
+    "rx",
+    "rx-js",
+    "reactive-x",
+    "reactive",
+    "declarative",
+    "cache",
+    "share"
   ],
   "bugs": {
     "url": "https://github.com/grachpower/rx-dects/issues"
