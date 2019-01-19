@@ -1,13 +1,16 @@
 {
   "name": "rx-dects",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "rxjs typescript decorators",
-  "main": "index.js",
+  "main": "dist/public-api.js",
   "scripts": {
-    "test": "jest",
+    "test": "npm run lint && jest --coverage --colors",
     "rimraf": "rimraf",
+    "size": "size-limit",
+    "lint": "tslint -c tslint.json 'src/**/*.ts' --force",
     "clean:dist": "npm run rimraf -- dist",
-    "build": "npm run clean:dist && tsc -p tsconfig.json"
+    "build": "npm run clean:dist && tsc -p tsconfig.json",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -15,6 +18,13 @@
   },
   "author": "Artem Andreev",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "typescript",
+    "js"
+  ],
   "bugs": {
     "url": "https://github.com/grachpower/rx-dects/issues"
   },
@@ -23,10 +33,33 @@
     "rxjs": "^6.3.3"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.13",
     "@types/node": "^10.12.18",
+    "jest": "^23.6.0",
     "rimraf": "^2.6.3",
+    "size-limit": "^0.21.1",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "typescript": "^3.2.4"
-  }
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "size-limit": [
+    {
+      "path": "dist/*.js",
+      "limit": "9 KB"
+    }
+  ]
 }

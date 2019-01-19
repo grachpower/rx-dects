@@ -1,13 +1,12 @@
 import 'jest';
 import { Observable, Observer, forkJoin } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
 
-import { CachedObservable } from '../src/public-api';
+import { SharedObservable } from '../src/public-api';
 
 class TestingClass {
     public evalTimes: number = 0;
 
-    @CachedObservable()
+    @SharedObservable()
     public featchData(): Observable<string> {
         return Observable.create((observer: Observer<string>) => {
             setTimeout(() => {
@@ -19,30 +18,34 @@ class TestingClass {
     }
 }
 
-test('Cached decorator should get data from cache after first resolved in sequence', () => {
+test('Shared decorator should share 1 cold observable between two observers', () => {
     const testEntity = new TestingClass();
 
     forkJoin(
         testEntity.featchData(),
-        testEntity.featchData(),
-        testEntity.featchData(),
+        testEntity.featchData()
     )
         .subscribe(() => {
             expect(testEntity.evalTimes).toBe(1);
         })
 });
 
-test('Cached decorator should get data from cache after first resolved', () => {
+test('Shared decorator should should create new observable if has no pending', () => {
     const testEntity = new TestingClass();
 
+
     testEntity.featchData()
-        .pipe(
-            concatMap(() => testEntity.featchData()),
-            concatMap(() => testEntity.featchData()),
-        )
         .subscribe(() => {
             expect(testEntity.evalTimes).toBe(1);
         });
+
+    testEntity.featchData()
+        .subscribe(() => {
+            expect(testEntity.evalTimes).toBe(2);
+        });
+
+    testEntity.featchData()
+        .subscribe(() => {
+            expect(testEntity.evalTimes).toBe(2);
+        });
 });
-
-
