@@ -1,36 +1,21 @@
-import { Observable, of } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 export function CachedObservable() {
-    const cacheMap = new Map<string, Observable<any>>();
-
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        if (descriptor === undefined) {
-            descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
-        }
-
+        const cacheMap = new Map<string, Observable<any>>();
         const originalMethod = descriptor.value;
 
-        descriptor.value = function () {
-            const args = [];
-            for (let i = 0; i < arguments.length; i++) {
-                args[i] = arguments[i];
-            }
-
+        descriptor.value = function (...args) {
             const serialized = JSON.stringify(args);
 
-            if (cacheMap.has(serialized)) {
-                return of(cacheMap.get(serialized));
-            } else {
-                const result = originalMethod.apply(this, args).pipe(share());
-
-                result.subscribe((value: any) => {
-                    cacheMap.set(serialized, value);
-                });
-
-                return result;
+            if (!cacheMap.has(serialized)) {
+                const source = originalMethod.apply(this, args)
+                  .pipe(shareReplay(1));
+                cacheMap.set(serialized, source);
             }
+
+            return cacheMap.get(serialized);
         };
     };
 }
-
