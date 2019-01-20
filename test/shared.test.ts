@@ -18,6 +18,18 @@ class TestingClass {
     }
 }
 
+test('Shared decorator should share observable between two observers', () => {
+    const testEntity = new TestingClass();
+
+    const observableOne = testEntity.featchData();
+    const observableTwo = testEntity.featchData();
+    const observableThree = testEntity.featchData();
+
+    expect(observableOne).toBe(observableTwo);
+    expect(observableOne).toBe(observableThree);
+    expect(observableTwo).toBe(observableThree);
+});
+
 test('Shared decorator should share 1 cold observable between two observers', () => {
     const testEntity = new TestingClass();
 
