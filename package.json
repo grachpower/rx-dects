@@ -10,7 +10,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts' --force",
     "clean:dist": "npm run rimraf -- dist",
     "build": "npm run clean:dist && tsc -p tsconfig.json",
-    "prepublish": "npm run build"
+    "prepublish": "npm run test && npm run build"
   },
   "repository": {
     "type": "git",
