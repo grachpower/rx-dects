@@ -1,8 +1,12 @@
-# RXJS Decorators
+# RxJS Decorators
 Rx-dects is a library with with typescript decorators which can help you to work with RxJs Observables. 
 
 ## Benefits
-Declarative design to sharing and caching rxjs observables. 
+Declarative design to sharing and caching rxjs observables.
+
+## Examples
+
+ - [Stackblitz Demo](https://stackblitz.com/edit/rs-dects-example) 
 
 ## Installation and Usage
 
@@ -50,10 +54,6 @@ You can import library in any application:
     }
   }
 ```
-
-## Examples
-
- - [Stackblitz Demo](https://stackblitz.com/edit/rs-dects-example)
 
 ## Important
 Important to install RxJS version 6 and above
