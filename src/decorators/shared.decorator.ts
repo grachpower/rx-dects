@@ -13,7 +13,7 @@ export function SharedObservable() {
                 const source = originalMethod.apply(this, args)
                     .pipe(
                       finalize(() => sharedMap.delete(serialized)),
-                      share()
+                      share(),
                     );
                 sharedMap.set(serialized, source);
             }
