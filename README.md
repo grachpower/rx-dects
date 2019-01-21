@@ -1,4 +1,6 @@
 # RxJS Decorators
+[![npm version](https://badge.fury.io/js/rx-dects.svg)](https://badge.fury.io/js/rx-dects)
+
 Rx-dects is a library with with typescript decorators which can help you to work with RxJs Observables. 
 
 ## Benefits
